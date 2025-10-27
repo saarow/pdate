@@ -1,5 +1,34 @@
 package pdate
 
+import "time"
+
+var (
+	persianWeekdays = [7]string{
+		"یکشنبه",       // Sunday (0)
+		"دوشنبه",       // Monday (1)
+		"سه\u200cشنبه", // Tuesday (2)
+		"چهارشنبه",     // Wednesday (3)
+		"پنجشنبه",      // Thursday (4)
+		"جمعه",         // Friday (5)
+		"شنبه",         // Saturday (6)
+	}
+
+	persianMonths = map[int]string{
+		1:  "فروردین",
+		2:  "اردیبهشت",
+		3:  "خرداد",
+		4:  "تیر",
+		5:  "مرداد",
+		6:  "شهریور",
+		7:  "مهر",
+		8:  "آبان",
+		9:  "آذر",
+		10: "دی",
+		11: "بهمن",
+		12: "اسفند",
+	}
+)
+
 func GregorianToJalali(gregorian Date) Date {
 	result := Date{}
 	array := [13]int{0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
@@ -46,4 +75,12 @@ func GregorianToJalali(gregorian Date) Date {
 	}
 
 	return result
+}
+
+func PersianMonthName(month int) string {
+	return persianMonths[month]
+}
+
+func PersianWeekdayName(weekday time.Weekday) string {
+	return persianWeekdays[weekday]
 }
