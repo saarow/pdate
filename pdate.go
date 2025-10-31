@@ -1,3 +1,4 @@
+// Package pdate provides utilities for working with Persian (Jalali) dates.
 package pdate
 
 import (
@@ -5,6 +6,8 @@ import (
 	"time"
 )
 
+// Date represents a complete date with year, month, day, and localized names.
+// It can represent both Gregorian and Jalali dates with appropriate naming.
 type Date struct {
 	Year  int
 	Month int
@@ -14,6 +17,7 @@ type Date struct {
 	MonthName   string
 }
 
+// GetGregorianDate returns the current date in Gregorian format with English names.
 func GetGregorianDate() Date {
 	now := time.Now()
 	year, month, day := now.Date()
@@ -28,6 +32,7 @@ func GetGregorianDate() Date {
 	}
 }
 
+// GetJalaliDate returns the current date in Jalali (Persian) format with Persian names.
 func GetJalaliDate() (Date, error) {
 	gDate := GetGregorianDate()
 	jDate := GregorianToJalali(gDate)

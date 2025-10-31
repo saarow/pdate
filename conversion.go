@@ -1,3 +1,4 @@
+// Package pdate provides utilities for working with Persian (Jalali) dates.
 package pdate
 
 import "time"
@@ -29,6 +30,7 @@ var (
 	}
 )
 
+// GregorianToJalali converts a Gregorian date to a Jalali (Persian) date.
 func GregorianToJalali(gregorian Date) Date {
 	result := Date{}
 	array := [13]int{0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
@@ -77,10 +79,12 @@ func GregorianToJalali(gregorian Date) Date {
 	return result
 }
 
+// PersianMonthName returns the Persian name for a given month number.
 func PersianMonthName(month int) string {
 	return persianMonths[month]
 }
 
+// PersianWeekdayName returns the Persian name for a given weekday.
 func PersianWeekdayName(weekday time.Weekday) string {
 	return persianWeekdays[weekday]
 }
