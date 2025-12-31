@@ -1,7 +1,10 @@
 // Package pdate provides utilities for working with Persian (Jalali) dates.
 package pdate
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 var (
 	persianWeekdays = [7]string{
@@ -27,6 +30,19 @@ var (
 		10: "دی",
 		11: "بهمن",
 		12: "اسفند",
+	}
+
+	persianDigits = map[rune]rune{
+		'0': '۰',
+		'1': '۱',
+		'2': '۲',
+		'3': '۳',
+		'4': '۴',
+		'5': '۵',
+		'6': '۶',
+		'7': '۷',
+		'8': '۸',
+		'9': '۹',
 	}
 )
 
@@ -87,4 +103,14 @@ func PersianMonthName(month int) string {
 // PersianWeekdayName returns the Persian name for a given weekday.
 func PersianWeekdayName(weekday time.Weekday) string {
 	return persianWeekdays[weekday]
+}
+
+// PersianDigits converts English digits to Persian digits in a string
+func PersianDigits(input string) string {
+	return strings.Map(func(r rune) rune {
+		if persianDigit, ok := persianDigits[r]; ok {
+			return persianDigit
+		}
+		return r
+	}, input)
 }
