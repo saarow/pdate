@@ -1,4 +1,3 @@
-// Package pdate provides utilities for working with Persian (Jalali) dates.
 package pdate
 
 import (
@@ -34,9 +33,6 @@ func GetGregorianDate() Date {
 
 // GetJalaliDate returns the current date in Jalali (Persian) format with Persian names.
 func GetJalaliDate() (Date, error) {
-	gDate := GetGregorianDate()
-	jDate := GregorianToJalali(gDate)
-
 	loc, err := time.LoadLocation("Asia/Tehran")
 	if err != nil {
 		return Date{}, fmt.Errorf(
@@ -44,11 +40,19 @@ func GetJalaliDate() (Date, error) {
 			err,
 		)
 	}
-	tehranTime := time.Now().In(loc)
-	weekday := tehranTime.Weekday()
 
-	jDate.WeekdayName = PersianWeekdayName(weekday)
-	jDate.MonthName = PersianMonthName(jDate.Month)
+	now := time.Now().In(loc)
+	year, month, day := now.Date()
+
+	gDate := Date{
+		Year:  year,
+		Month: int(month),
+		Day:   day,
+	}
+
+	jDate := GregorianToJalali(gDate)
+	jDate.WeekdayName = PersianWeekdayName(now.Weekday())
+	jDate.MonthName = PersianMonthName(gDate.Month)
 
 	return jDate, nil
 }

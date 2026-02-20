@@ -1,4 +1,3 @@
-// Package pdate provides utilities for working with Persian (Jalali) dates.
 package pdate
 
 import (
@@ -61,7 +60,7 @@ func GregorianToJalali(gregorian Date) Date {
 	}
 
 	var temp int
-	if year > 2 {
+	if gregorian.Month > 2 {
 		temp = year + 1
 	} else {
 		temp = year
