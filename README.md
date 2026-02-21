@@ -1,3 +1,11 @@
+# Old v1 Version
+
+⚠️ **This branch contains the Old v1 version which is no longer maintained.**
+
+Please use the main branch for the latest v2 version.
+
+---
+
 # pdate - Go Package for Persian (Jalali) Dates
 ### A comprehensive Go package for working with Persian (Jalali) dates. Convert between Gregorian and Jalali calendars, get localized Persian month and weekday names, and handle Persian date operations with ease.
 
