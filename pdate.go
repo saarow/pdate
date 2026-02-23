@@ -20,15 +20,36 @@ func init() {
 	}
 }
 
+// Now returns the current Jalali date in Tehran timezone.
 func Now() Pdate {
-	t := time.Now().In(tehranLocation)
-	jy, jm, jd := gregorianToJalali(t.Year(), int(t.Month()), t.Day())
+	return FromTime(time.Now().In(tehranLocation))
+}
+
+// New creates a Pdate from Jalali year, month, and day.
+func New(year int, month PersianMonth, day int) Pdate {
+	gy, gm, gd := jalaliToGregorian(year, int(month), day)
+	t := time.Date(gy, time.Month(gm), gd, 12, 0, 0, 0, tehranLocation)
+
+	return Pdate{
+		year:    year,
+		month:   month,
+		day:     day,
+		weekday: PersianWeekdayFromGo(t.Weekday()),
+		t:       t,
+	}
+}
+
+// FromTime creates a Pdate from any time.Time value.
+// The conversion uses the date portion in t's timezone.
+func FromTime(t time.Time) Pdate {
+	gy, gm, gd := t.Date()
+	jy, jm, jd := gregorianToJalali(gy, int(gm), gd)
 
 	return Pdate{
 		year:    jy,
 		month:   PersianMonth(jm),
 		day:     jd,
-		weekday: PersianWeekday(jd),
+		weekday: PersianWeekdayFromGo(t.Weekday()),
 		t:       t,
 	}
 }
