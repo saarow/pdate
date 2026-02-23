@@ -5,18 +5,18 @@ type PersianMonth int
 
 // Persian months
 const (
-	Farvardin   PersianMonth = 1
-	Ordibehesht PersianMonth = 2
-	Khordad     PersianMonth = 3
-	Tir         PersianMonth = 4
-	Mordad      PersianMonth = 5
-	Shahrivar   PersianMonth = 6
-	Mehr        PersianMonth = 7
-	Aban        PersianMonth = 8
-	Azar        PersianMonth = 9
-	Dey         PersianMonth = 10
-	Bahman      PersianMonth = 11
-	Esfand      PersianMonth = 12
+	Farvardin PersianMonth = 1 + iota
+	Ordibehesht
+	Khordad
+	Tir
+	Mordad
+	Shahrivar
+	Mehr
+	Aban
+	Azar
+	Dey
+	Bahman
+	Esfand
 )
 
 var (

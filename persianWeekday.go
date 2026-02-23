@@ -8,13 +8,13 @@ type PersianWeekday int
 
 // Persian weekdays
 const (
-	Shanbe       PersianWeekday = 0 // شنبه - Saturday
-	Yekshanbe    PersianWeekday = 1 // یکشنبه - Sunday
-	Doshanbe     PersianWeekday = 2 // دوشنبه - Monday
-	Seshanbe     PersianWeekday = 3 // سه‌شنبه - Tuesday
-	Chaharshanbe PersianWeekday = 4 // چهارشنبه - Wednesday
-	Panjshanbe   PersianWeekday = 5 // پنجشنبه - Thursday
-	Jome         PersianWeekday = 6 // جمعه - Friday
+	Shanbe PersianWeekday = iota
+	Yekshanbe
+	Doshanbe
+	Seshanbe
+	Chaharshanbe
+	Panjshanbe
+	Jome
 )
 
 var (
