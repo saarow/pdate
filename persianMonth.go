@@ -1,6 +1,7 @@
 package pdate
 
-// PersianMonth represents a month in the Jalali (Persian) calendar.
+// PersianMonth represents a month in the Persian calendar
+// (Farvardin = 1, ...).
 type PersianMonth int
 
 // Persian months
@@ -53,23 +54,14 @@ var (
 	}
 )
 
-// Valid reports whether m is a valid month (1-12).
-func (m PersianMonth) Valid() bool {
-	return m >= Farvardin && m <= Esfand
-}
-
-// String returns the Persian name of the month (e.g., "فروردین").
+// String returns the English transliteration of the month
+// (e.g., "Farvardin", "Ordibehesht", ...).
 func (m PersianMonth) String() string {
-	if !m.Valid() {
-		return ""
-	}
-	return persianMonthNames[m]
+	return englishMonthNames[m]
 }
 
-// EnglishName returns the English transliteration (e.g., "Farvardin").
-func (m PersianMonth) EnglishString() string {
-	if !m.Valid() {
-		return ""
-	}
-	return englishMonthNames[m]
+// PersianName returns the month name in Persian
+// (e.g., "فروردین", "اردیبهشت", ...).
+func (m PersianMonth) PersianName() string {
+	return persianMonthNames[m]
 }

@@ -2,6 +2,8 @@ package pdate
 
 import "time"
 
+// Pdate represents an immutable date in the Persian (Jalali/Solar Hijri) calendar.
+// Pdate is designed to be similar to time.Time.
 type Pdate struct {
 	year    int
 	month   PersianMonth
@@ -20,13 +22,13 @@ func init() {
 	}
 }
 
-// Now returns the current Jalali date in Tehran timezone.
+// Now returns the current Persian date in Tehran timezone.
 func Now() Pdate {
 	return FromTime(time.Now().In(tehranLocation))
 }
 
-// New creates a Pdate from Jalali year, month, and day.
-func New(year int, month PersianMonth, day int) Pdate {
+// Date create and returns a Pdate from Persian year, month, and day.
+func Date(year int, month PersianMonth, day int) Pdate {
 	gy, gm, gd := jalaliToGregorian(year, int(month), day)
 	t := time.Date(gy, time.Month(gm), gd, 12, 0, 0, 0, tehranLocation)
 
@@ -39,7 +41,7 @@ func New(year int, month PersianMonth, day int) Pdate {
 	}
 }
 
-// FromTime creates a Pdate from any time.Time value.
+// FromTime create and returns a Pdate from any time.Time value.
 // The conversion uses the date portion in t's timezone.
 func FromTime(t time.Time) Pdate {
 	gy, gm, gd := t.Date()
@@ -54,17 +56,11 @@ func FromTime(t time.Time) Pdate {
 	}
 }
 
-// Year returns the Jalali year (e.g., 1404).
+// Year returns the Persian year (e.g., 1404).
 func (p Pdate) Year() int { return p.year }
 
-// Month returns the Jalali month as PersianMonth.
+// Month returns the Persian month as PersianMonth.
 func (p Pdate) Month() PersianMonth { return p.month }
-
-// MonthInt returns the month as an int (1-12).
-func (p Pdate) MonthInt() int { return int(p.month) }
-
-// MonthName returns the Persian name of the month (e.g., "خرداد").
-func (p Pdate) MonthName() string { return p.month.String() }
 
 // Day returns the day of the month (1-31).
 func (p Pdate) Day() int { return p.day }
@@ -72,19 +68,5 @@ func (p Pdate) Day() int { return p.day }
 // Weekday returns the day of the week as PersianWeekday.
 func (p Pdate) Weekday() PersianWeekday { return p.weekday }
 
-// WeekdayName returns the Persian name of the weekday (e.g., "پنجشنبه").
-func (p Pdate) WeekdayName() string { return p.weekday.String() }
-
 // Time returns the underlying time.Time value.
 func (p Pdate) Time() time.Time { return p.t }
-
-// Location returns the timezone of the underlying time.
-func (p Pdate) Location() *time.Location { return p.t.Location() }
-
-// Unix returns the Unix timestamp (seconds since Unix epoch).
-func (p Pdate) Unix() int64 { return p.t.Unix() }
-
-// IsLeapYear reports whether this date's year is a leap year.
-func (p Pdate) IsLeapYear() bool {
-	return IsLeapYear(p.year)
-}

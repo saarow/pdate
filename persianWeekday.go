@@ -2,8 +2,8 @@ package pdate
 
 import "time"
 
-// PersianWeekday represents a day of the week in Persian calendar.
-// Persian week starts on Shanbe (Saturday).
+// PersianWeekday represents a day of the week in Persian calendar
+// (Shanbe = 0, ...).
 type PersianWeekday int
 
 // Persian weekdays
@@ -39,20 +39,16 @@ var (
 	}
 )
 
-// String returns the Persian name of the weekday (e.g., "شنبه").
+// String returns the English transliteration of the weekday
+// (e.g., "Shanbe", "Yekshanbe", ...).
 func (w PersianWeekday) String() string {
-	if w < Shanbe || w > Jome {
-		return ""
-	}
-	return persianWeekdayNames[w]
+	return englishWeekdayNames[w]
 }
 
-// EnglishName returns the English transliteration (e.g., "Shanbe").
-func (w PersianWeekday) EnglishName() string {
-	if w < Shanbe || w > Jome {
-		return ""
-	}
-	return englishWeekdayNames[w]
+// PersianName returns the Persian name of the weekday
+// (e.g., "شنبه", "یکشنبه", ...).
+func (w PersianWeekday) PersianName() string {
+	return persianWeekdayNames[w]
 }
 
 // GoWeekday converts PersianWeekday to Go's time.Weekday.
