@@ -1,6 +1,9 @@
 package pdate
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 // Pdate represents an immutable date in the Persian (Jalali/Solar Hijri) calendar.
 // Pdate is designed to be similar to time.Time.
@@ -70,3 +73,9 @@ func (p Pdate) Weekday() PersianWeekday { return p.weekday }
 
 // Time returns the underlying time.Time value.
 func (p Pdate) Time() time.Time { return p.t }
+
+// String returns the date formatted using the format string
+// "YYYY-MM-DD".
+func (p Pdate) String() string {
+	return fmt.Sprintf("%04d-%02d-%02d", p.year, int(p.month), p.day)
+}
